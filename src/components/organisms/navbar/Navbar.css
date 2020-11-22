@@ -1,0 +1,94 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header img {
+    width: 10rem;
+    margin: 1rem;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
+.hamburger-menu-container {
+    margin: 1rem 2rem;
+    cursor: pointer;
+}
+
+.hamburger-menu {
+    top: 50%;
+    width: 36px;
+    height: 4px;
+    background: var(--black);
+    position: relative;
+    transition: 0.5s;
+}
+
+.hamburger-menu::before{
+    top: -11px;
+    content: '';
+    position:absolute;
+    width: 36px;
+    height: 4px;
+    background:var(--black);
+    transition:0.5s;
+}
+  
+  .hamburger-menu::after {
+    top: 11px;
+    content: '';
+    position:absolute;
+    width: 36px;
+    height: 4px;
+    background:var(--black);
+    transition:0.5s;
+}
+
+.hamburger-menu-container.active-menu .hamburger-menu {
+    background:rgba(0,0,0,0);
+}
+  
+.hamburger-menu-container.active-menu .hamburger-menu::before {
+    top: 0;
+    transform:rotate(45deg);
+}
+  
+.hamburger-menu-container.active-menu .hamburger-menu::after {
+    top: 0;
+    transform:rotate(135deg);
+}
+
+ul {
+    display: none;
+}
+
+ul.active-menu {
+    display: block;
+}
+
+header.active-menu {
+    border-bottom: 3px solid var(--grey);
+}
+
+
+li {
+    height: 2rem;
+    border-bottom: 3px solid var(--grey);
+    padding:1rem;
+    text-align: center;    
+    line-height: 2rem;
+    white-space: nowrap;
+}
+
+a {
+    color: var(--black);
+    font-family: Myanmar Text;
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: inline-block;
+}
+
+

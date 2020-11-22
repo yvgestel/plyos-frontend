@@ -1,0 +1,14 @@
+<svg id="plyos-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 762.5 318.47">
+    <defs>
+        <style>
+            .polygon{fill:#46bc71;stroke:#46bc71;stroke-miterlimit:10;stroke-width:2px;}
+            .text{font-size:145.05px;font-family:MyanmarText-Bold, Myanmar Text;font-weight:700;}
+        </style>
+    </defs>
+    <title>plyos-logo</title>
+    <polygon class="polygon" points="268.71 316.76 2.33 216.35 62.3 181.82 244.22 250.39 268.71 316.76"/>
+    <polygon class="polygon" points="239.97 150.79 127.98 108.57 163.47 64.81 239.96 93.64 239.97 150.79"/>
+    <polygon class="polygon" points="245.11 75.24 170.81 47.23 200.33 1.22 251.07 20.34 245.11 75.24"/>
+    <polygon class="polygon" points="245.92 230.63 73.41 165.61 118.5 125.46 236.31 169.87 245.92 230.63"/>
+    <text class="text" transform="translate(245.92 206.45) scale(1.43 1)">Plyos</text>
+</svg>
