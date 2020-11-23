@@ -61,18 +61,28 @@ img:hover {
     transform:rotate(135deg);
 }
 
-ul {
-    display: none;
-}
-
-ul.active-menu {
-    display: block;
-}
-
 header.active-menu {
     border-bottom: 3px solid var(--grey);
 }
 
+nav {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+nav ul {
+    width: 100%;
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: var(--white);
+}
+
+nav.active-menu ul {
+    display: block;
+
+}
 
 li {
     height: 2rem;
@@ -83,7 +93,7 @@ li {
     white-space: nowrap;
 }
 
-a {
+.link {
     color: var(--black);
     font-family: Myanmar Text;
     font-weight: bold;
