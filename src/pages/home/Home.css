@@ -1,0 +1,9 @@
+.home-bg {
+    position: absolute;
+    z-index: -1;
+}
+
+.home-fg {
+    position: absolute;
+    z-index: 1;
+}

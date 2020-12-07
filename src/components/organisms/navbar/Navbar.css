@@ -72,16 +72,16 @@ nav {
 }
 
 nav ul {
+    height: 100vh;
     width: 100%;
     display: none;
     position: absolute;
-    z-index: 1;
+    z-index: 99;
     background-color: var(--white);
 }
 
 nav.active-menu ul {
     display: block;
-
 }
 
 li {
@@ -95,7 +95,6 @@ li {
 
 .link {
     color: var(--black);
-    font-family: Myanmar Text;
     font-weight: bold;
     font-size: 1.2rem;
     display: inline-block;

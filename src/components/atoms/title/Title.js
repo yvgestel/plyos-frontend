@@ -3,14 +3,15 @@ import './Title.css';
 
 const STYLES = [
     "page-hdr",
-    "blog-hdr"
+    "blog-hdr",
+    "big-title"
 ];
 
-export const Title = ({ title, style }) => {
+export const Title = ({ children, className }) => {
 
-    const checkStyle = STYLES.includes(style) ? style : STYLES[0];
+    const checkClass = STYLES.includes(className) ? className : STYLES[0];
 
     return (
-        <h1 className={checkStyle}>{title}</h1>
+        <h1 className={checkClass}>{children}</h1>
     );
 };

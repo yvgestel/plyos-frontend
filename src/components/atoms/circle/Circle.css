@@ -1,0 +1,13 @@
+.circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.circ-green {
+    background-color: var(--green);
+}
+
+.circ-orange {
+    background-color: var(--orange);
+}

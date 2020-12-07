@@ -1,20 +1,23 @@
 .preview-wrapper {
-    width: 15rem;
+    width: 12rem;
     position: relative;
     z-index: 1;
+    margin: .5rem
 }
 
 .preview-img {
-    width: 100%;
+    width: 12rem;
+    height: 9rem;
 }
 
 .text-bg {
     position: absolute;
-    bottom: 0;
-    width: 100%;
+    bottom: 0.4rem;
+    width: calc(100% - 6px);
     height: 1.5rem;
     background-color: var(--grey);
     opacity: 0.75;
+    padding: 4px 0 2px 6px;
 }
 
 .preview-p {
@@ -23,5 +26,4 @@
     font-family: Myanmar Text;
     font-weight: bold;
     line-height: 1.9rem;
-    text-align: center;
 }

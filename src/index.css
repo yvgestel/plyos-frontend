@@ -26,10 +26,12 @@ time, mark, audio, video {
     font-size:100%;
     vertical-align:baseline;
     background:transparent;
+    font-family: Myanmar Text;
 }
 
 body {
     line-height:1;
+    background-color: var(--white);
 }
 
 article,aside,details,figcaption,figure,

@@ -1,0 +1,4 @@
+.wrap-2 {
+    width: calc(100% - 2rem);
+    padding: 2rem;
+}

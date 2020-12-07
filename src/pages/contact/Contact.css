@@ -1,0 +1,8 @@
+.contact-section {
+    width: 75%;
+    border-radius: 50px;
+    margin: 5rem auto;
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem 0rem;
+} 

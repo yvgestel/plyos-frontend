@@ -5,6 +5,8 @@ import "./Navbar.css";
 
 export const Navbar = () => {
 
+    let user = localStorage.getItem("user");
+
     const getElements = () => {
         const icon = document.getElementById("hamburger-menu-container");
         const header = document.getElementById("nav-header");
@@ -44,8 +46,11 @@ export const Navbar = () => {
                     <li onClick={openOrCloseNav}><Link className="link" to="/exercises">Exercises</Link></li>
                     <li onClick={openOrCloseNav}><Link className="link" to="/mytraining">MyTraining</Link></li>
                     <li onClick={openOrCloseNav}><Link className="link" to="/blogs">Blogs</Link></li>
-                    <li onClick={openOrCloseNav}><Link className="link" to="/profile">Profile</Link></li>
                     <li onClick={openOrCloseNav}><Link className="link" to="/contact">Contact</Link></li>
+                    {user 
+                        ? <li onClick={openOrCloseNav}><Link className="link" to="/profile">Profile</Link></li>
+                        : <li onClick={openOrCloseNav}><Link className="link" to="/login">Log in</Link></li>
+                    }
                 </ul>
             </nav>
         </Fragment>

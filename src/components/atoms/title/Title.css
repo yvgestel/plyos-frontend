@@ -1,7 +1,15 @@
-.page-header {
-    font-size: 1.25rem;
+.big-title {
+    font-size: 3rem;
 }
 
-.blog-header {
+.page-hdr {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+    width: 100%;
+    text-align: center;
+    line-height: calc(3rem*1.4);
+}
+
+.blog-hdr {
     font-size: 1.5rem;
 }

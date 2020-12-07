@@ -1,15 +1,18 @@
 import React from 'react';
 import './Preview.css';
 
-export const Preview = ({img, title}) => {
+export const Preview = ({img, title, onClick}) => {
     //check for img, if not use default image
     
     return (
-        <div className="preview-wrapper">
+        <div className="preview-wrapper" onClick={onClick}>
             <img className="preview-img" src={img} alt={title}/>
-            <div className="text-bg">
-                <p className="preview-p">{title}</p>
-            </div>
+            {title &&
+                <div className="text-bg">
+                    <p className="preview-p">{title}</p>
+                </div>
+            }
+            
         </div>        
     );
 };
