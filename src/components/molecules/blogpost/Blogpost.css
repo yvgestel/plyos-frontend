@@ -2,6 +2,7 @@
     width: 80%;
     margin: 0 auto 2rem;
     text-align: center;
+    color: var(--black)
 }
 
 .blog-post-info {
@@ -10,3 +11,5 @@
     margin-top: -1rem;
     padding: 1.5rem 1rem;
 }
+
+

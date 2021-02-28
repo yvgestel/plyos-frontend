@@ -1,8 +1,13 @@
 .search-result-container {
     width: 85%;
-    height: 500px;
-    margin: 2rem auto 0;
+    margin: 2rem auto 0rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding-bottom: 15rem;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
 }

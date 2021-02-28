@@ -10,8 +10,10 @@ import { Title } from '../../components/atoms/title/Title';
 export const Contact = () => {
     const { register, handleSubmit, errors } = useForm();
 
-    const sendContactForm = () => {
-        console.log("Verzenden")
+    const sendContactForm = ({name, subject, message}) => {
+        const completeMessage = name +`
+        `+ message
+        window.open(`mailto:youp21@msn.com?subject=${subject}&body=${completeMessage}`)
     }
 
     return (
@@ -28,13 +30,13 @@ export const Contact = () => {
                 error={errors.email}    
                 />
                 <Input 
-                id="email" 
-                name="email" 
-                label="Email" 
+                id="subject" 
+                name="subject" 
+                label="Subject" 
                 type="text" 
                 className="input-list" 
                 register={register({ required: true })}
-                error={errors.email}    
+                error={errors.subject}    
                 />
                
 

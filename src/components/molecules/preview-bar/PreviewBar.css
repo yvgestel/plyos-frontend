@@ -9,13 +9,9 @@
 
 .preview-container {
     display: flex;
-    overflow-x: auto;
-    scrollbar-width: none;
+    overflow-x: scroll;
+    scrollbar-width: 1px;
     -ms-overflow-style: none;   
-}
-
-.preview-container::-webkit-scrollbar{
-    display: none;
 }
 
 .preview-bar-wrapper::before {

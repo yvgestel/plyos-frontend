@@ -3,7 +3,9 @@ import './PreviewBar.css';
 
 import { Preview } from '../preview/Preview';
 
-export const PreviewBar = ({ title, pathTo, data}) => {
+import ViewAll from '../../../assets/view-all.jpg';
+
+export const PreviewBar = ({ title, pathTo, data, viewMore}) => {
     return (
         <div id="preview-bar" className="preview-bar-wrapper" data-content={title}>
             <div className="preview-container">
@@ -21,6 +23,15 @@ export const PreviewBar = ({ title, pathTo, data}) => {
                     <div className="empty-preview">
                         <span>No exercises found.</span>
                     </div>   
+                }
+                {
+                    viewMore && data.length > 0 && 
+                    <Preview 
+                        key="viewMore"
+                        img={ViewAll}
+                        path="exercises/search"
+                        id=""
+                    /> 
                 }
             </div>
         </div>

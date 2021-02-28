@@ -162,7 +162,7 @@ export const SearchPage = () => {
             </div>
 
             <Popup hide={hidePopup}>
-                <form>
+                <form className="search-form">
                     <span>Select tags to filter:</span>
                     {
                         tagsList.map(tag => (

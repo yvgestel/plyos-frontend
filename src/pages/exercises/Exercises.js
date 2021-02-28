@@ -30,8 +30,7 @@ export const Exercises = () => {
             const [response] = await db.fetch("/exercises/most-watched")
             return response.data
         } 
-        async function fetchFavorites() {
-            const token = await getUserToken()
+        async function fetchFavorites(token) {
             const [response] = await db.privateFetch(`/user/${currentUser.userId}/favorites`, token)
             return response.data[0].favorites
         }
@@ -39,11 +38,14 @@ export const Exercises = () => {
         async function fetchData () {
             const newest = await fetchNewest();
             const mostWatched = await fetchMostWatched();
-            const favorites = await fetchFavorites();
+            const token = await getUserToken()
+            if(token){
+                var favorite = await fetchFavorites(token);
+            }
             setExercises({
-                newest: newest,
-                mostWatched: mostWatched,
-                favorite: favorites,
+                newest,
+                mostWatched,
+                favorite,
             })
         }
         getUser()
