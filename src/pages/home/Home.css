@@ -1,9 +1,29 @@
 .home-bg {
     position: absolute;
     z-index: -1;
+    bottom: 0;
+}
+
+.circ-green {
+    position: absolute;
+    bottom: -7.5rem;
+    left: 15rem
+}
+
+.circ-orange {
+    position: absolute;
+    left: -7rem;
+    bottom: 18rem;
+}
+
+.bg-img {
+    position: absolute;
+    bottom: 0rem;
+    left: -8rem;
+    z-index: 1;
 }
 
 .home-fg {
-    position: absolute;
-    z-index: 1;
+    padding: 5rem 2rem 0 2rem;
 }
+

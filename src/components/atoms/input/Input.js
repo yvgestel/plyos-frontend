@@ -1,21 +1,19 @@
 import React from 'react';
-//import { useForm } from 'react-hook-form';
 import './Input.css';
 
-export const Input = ({name, text, type, className, inputRef}) => {
+export const Input = ({id, label, register, error,  ...inputProps}) => {
 
     return (
         <fieldset>
             <input 
-                name={name} 
-                type={type} 
-                className={className} 
-                autoComplete="off" 
+                id={id}
                 required
-                ref={inputRef}
+                ref={register}
+                {...inputProps}
             >
             </input>
-            <label htmlFor={name}>{text}</label>
+            <label htmlFor={id}>{label}</label>
+            {error && <p>{error.message}</p>}
         </fieldset>
     );
 };

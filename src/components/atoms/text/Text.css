@@ -2,3 +2,7 @@ p {
     font-size: 1rem;
     line-height: 1.4rem;
 }
+
+.text-center {
+    text-align: center;
+}

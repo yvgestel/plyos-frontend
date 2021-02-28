@@ -1,19 +1,37 @@
-import React, { Fragment, useState} from 'react';
+import React, { Fragment, useState, useContext} from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
+
 import "./Login.css";
 
 import { Button } from '../../components/atoms/button/Button';
 import { Input } from '../../components/atoms/input/Input';
-import { Redirect, useLocation } from 'react-router-dom';
 
-export const Login = () => {
+import DatabaseHelper from '../../helpers/databaseHelper';
+import { UserContext } from '../../context/UserContextProvider';
+
+export const Login = (props) => {
     const { register, handleSubmit, errors } = useForm();
-    const location = useLocation();
     const [signUpPage, setSignUpPage] = useState(false);
+    const { logInUser, setUserToken } = useContext(UserContext);
+    const history = useHistory();
 
-    const logIn = () => {
-        console.log("You clicked LOGIN");
-        //localStorage.setItem("user", "testUser")
+    const db = new DatabaseHelper ()
+
+    const logIn = async ({email, password}) => {
+        const user = {
+          email: email,
+          password: password
+        };
+ 
+        const [response, error] = await db.logIn(user);
+        if (response) {
+          setUserToken(response.token)
+          logInUser(user.email, response.id);
+          history.location.state ? history.push(history.location.state.from): history.push("/")
+        } else {
+          console.log(error)
+        }
     };
 
     const setSignUp = () => {
@@ -22,52 +40,99 @@ export const Login = () => {
 
     const signUp = () => {
         console.log("You clicked SIGN UP");
+        //extra validation ?
+        //hashing ?
+        //post request
+        //const newUser = {
+        //  email: "",
+        //  password: ""
+        //};
     };
 
     const forgotPassword = () => {
         console.log("You forgot your password..")
     };
 
-    const onSubmit = (data) => {
-        console.log("You LOGGED IN");
-        console.log(data);
-        console.log(errors)
-    }
-
     return (
-        <Fragment>
-            {localStorage.getItem("user") 
-            ? <Redirect to={location.state.form || "/"} />
-            : 
-                <form className="login-section" onSubmit={handleSubmit(onSubmit)}>
-                    <Input name="email" text="Email" type="text" className="input-list" inputRef={register({ required: true })}/>
-                    <Input name="password" text="Password" type="text" className="input-list" inputRef={register({ required: true })}/>
-                    {signUpPage && 
-                        <Input name="password_repeat" text="Confirm password" type="text" className="input-list" inputRef={register({ required: true })}/>
+      <Fragment>
+        <form className="login-section">
+            <Input 
+                id="email" 
+                name="email" 
+                label="Email" 
+                type="text" 
+                className="input-list" 
+                register={register(
+                    {
+                      required: {
+                        value: true,
+                        message: 'Dit veld mag niet leeg zijn',
+                      }
                     }
-                    {!signUpPage ?
-                        <Fragment>
-                            <Button onClick={logIn}
-                            type="submit"
-                            className="btn-primary"
-                            >Log in</Button>
-                            <Button onClick={setSignUp}
-                            type="text"
-                            className="btn-secondary"
-                            >Sign up</Button>
-                            <Button onClick={forgotPassword}
-                            type="text"
-                            className="btn-tertiary"
-                            >Forgot my password</Button>
-                        </Fragment>
-                    :
-                        <Button onClick={signUp}
-                        type="submit"
-                        className="btn-primary"
-                        >Sign up</Button>
+                  )}
+                error={errors.email}    
+            />
+            <Input 
+                id="password" 
+                name="password" 
+                label="Password" 
+                type="password" 
+                className="input-list" 
+                register={register(
+                    {
+                      required: {
+                        value: true,
+                        message: 'Dit veld mag niet leeg zijn',
+                      },
+                      // minLength: {
+                      //     value: 8,
+                      //     message: 'Een wachtwoord moet minimaal 8 tekens zijn'
+                      // }
                     }
-                </form>
+                  )}
+                error={errors.password}    
+            />
+            {signUpPage && 
+                <Input 
+                    id="password_repeat" 
+                    name="password_repeat" 
+                    label="Confirm password" 
+                    type="password" 
+                    className="input-list" 
+                    register={register(
+                        {
+                          required: {
+                            value: true,
+                            message: 'Dit veld mag niet leeg zijn',
+                          }
+                        }
+                      )}
+                    error={errors.password_repeat}    
+                />
             }
-        </Fragment>
+            {!signUpPage ?
+                <Fragment>
+                    <Button onClick={handleSubmit(logIn)}
+                    type="submit"
+                    className="btn-primary"
+                    >Log in</Button>
+                    <Button onClick={setSignUp}
+                    type="text"
+                    className="btn-secondary"
+                    >Sign up</Button>
+                    <Button onClick={forgotPassword}
+                    type="text"
+                    className="btn-tertiary"
+                    >Forgot my password</Button>
+                </Fragment>
+            :
+                <Button onClick={handleSubmit(signUp)}
+                type="submit"
+                className="btn-primary"
+                >Sign up</Button>
+            }
+            <span></span>
+        </form>
+      </Fragment>
     );
 };

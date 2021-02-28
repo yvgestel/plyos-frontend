@@ -1,0 +1,26 @@
+article {
+    padding: 0 2rem 15rem 2rem;
+}
+
+article h1 {
+    font-size: 1.8rem;
+    line-height: calc(1.2 * 1.4);
+    margin: 1rem auto 1rem;
+}
+
+article h2 {
+    font-size: 1.4rem;
+    line-height: calc(1.2 * 1.4);
+    margin: 1rem auto 0;
+}
+
+article p {
+    font-size: 1.2rem;
+    line-height: calc(1.2 * 1.4);
+}
+
+article ul li {
+    font-size: 1.2rem;
+    line-height: calc(1.2 * 1.4);
+}
+

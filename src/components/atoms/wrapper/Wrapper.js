@@ -3,6 +3,8 @@ import './Wrapper.css';
 
 export const Wrapper = ({ className, children }) => {
     return (
-        <div className={className}>{children}</div>
+        <div className={className}>
+            {children}
+        </div>
     );
 };

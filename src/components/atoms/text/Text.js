@@ -1,8 +1,12 @@
 import React from 'react';
 import './Text.css';
 
-export const Text = ({ className, children }) => {
+export const Text = ({ align, children }) => {
     return (
-        <p className={className}>{children}</p>
+        <p 
+        className={align}
+        >
+            {children}
+        </p>
     );
 }; 

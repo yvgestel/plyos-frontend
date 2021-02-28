@@ -1,0 +1,24 @@
+.exercises-img {
+    width: 70%;
+    height: 200px;
+    z-index: 1;
+    position: absolute;
+    left: 15%;
+    border-radius: 50px;
+    margin: 2rem auto 0rem;
+}
+
+.blog-img {
+    width: 70%;
+    height: 10rem;
+    border-radius: 25px 25px 0 0;
+    border: 4px solid var(--grey);
+}
+
+.blog-post-img {
+    display: block;
+    width: 70%;
+    height: 200px;
+    border-radius: 50px;
+    margin: 3rem auto;
+}

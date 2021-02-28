@@ -5,26 +5,22 @@ import backgroundImage from '../../assets/split-vision.png'
 import { Circle } from '../../components/atoms/circle/Circle';
 import { Title } from '../../components/atoms/title/Title';
 import { Text } from '../../components/atoms/text/Text';
-import { Wrapper } from '../../components/atoms/wrapper/Wrapper';
 
-export const Home = () => {
+export const Home = (props) => {
     return (
-        <Wrapper className="wrap-2">
+        <div className="home-page">
             <div className="home-bg">
                 <Circle className="circ-green"/>
                 <Circle className="circ-orange"/>
-                <img src={backgroundImage} alt="Player with split vision"/>
+                <img className="bg-img" src={backgroundImage} alt="Player with split vision"/>
             </div>
             <div className="home-fg">
-                <Title className="big-title">Interactive exercises!</Title>
+                <Title className="big-title">Welkom!</Title>
                 <Text className="">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing 
-                elit. Aenean commodo ligula eget dolor. Aenean massa.
-                Cum sociis natoque penatibus et magnis dis parturient 
-                montes, nascetur ridiculus mus.
+                Plyos is er om jou, als trainer/coach, zo goed mogelijk te helpen. Lees blogs, bekijken oefeningen en stel je eigen training samen.
                 </Text>
             </div>
-        </Wrapper>
+        </div>
         
     );
 };

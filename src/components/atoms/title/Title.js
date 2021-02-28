@@ -4,7 +4,8 @@ import './Title.css';
 const STYLES = [
     "page-hdr",
     "blog-hdr",
-    "big-title"
+    "big-title",
+    "sm-title"
 ];
 
 export const Title = ({ children, className }) => {

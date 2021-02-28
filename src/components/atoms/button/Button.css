@@ -46,3 +46,8 @@ button {
     color: var(--black);
     border-bottom: 2px solid var(--orange);
 }
+
+.btn-green {
+    background-color: var(--green);
+    border: 2px solid var(--green);
+}

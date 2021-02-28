@@ -15,44 +15,76 @@ import { Login } from './pages/login/Login';
 import { Contact } from './pages/contact/Contact';
 import { Exercises } from './pages/exercises/Exercises';
 import { MyTraining } from './pages/mytraining/MyTraining';
+import { MyProfile } from './pages/myprofile/MyProfile';
 import { SearchPage } from './pages/exercises/search/Search';
+import { ExerciseID } from './pages/exercises/id/ExerciseID';
+import { Blogs } from './pages/blogs/Blogs';
+import { BlogID } from './pages/blogs/id/BlogID';
+import { UnknownURL } from './pages/404/404';
+
+import { UserContextProvider } from './context/UserContextProvider';
 
 function App() {
   return (
-    <Router>
-      <Navbar/>
+    <UserContextProvider>
+        <Router>
+        <Navbar/>
 
-      <Switch>
-        <Route path="/" exact>
-          <Home></Home>
-        </Route>
-        <Route path="/exercises" exact>
-          <Exercises></Exercises>
-        </Route>
-        <Route path="/exercises/search" exact>
-          <SearchPage></SearchPage>
-        </Route>
-        <PrivateRoute path="/mytraining" exact>
-          <MyTraining></MyTraining>
-        </PrivateRoute>  
-        <Route path="/blogs">
-          <h1>Blogs</h1>
-        </Route>
-        <PrivateRoute path="/profile">
-          <h1>Profile</h1>
-        </PrivateRoute>
-        <Route path="/login">
-          <Login></Login>
-        </Route>
-        <Router path="/contact">
-          <Contact></Contact>
+          <div className="page-container">
+            <Switch>
+              <Route 
+                path="/" 
+                exact 
+                component={Home}
+              />
+              <Route 
+                path="/exercises" 
+                exact 
+                component={Exercises}
+              />
+              <Route 
+              path="/exercises/search" 
+              exact 
+              component={SearchPage}
+              />
+              <Route 
+              path="/exercises/:id"  
+              component={ExerciseID}
+              />
+              <PrivateRoute path="/mytraining" exact>
+                <MyTraining></MyTraining>
+              </PrivateRoute>  
+              <Route 
+                path="/blogs" 
+                exact 
+                component={Blogs} 
+              />
+              <Route 
+                path="/blogs/:id" 
+                exact 
+                component={BlogID} 
+              />
+              <Route 
+                path="/contact" 
+                component={Contact}
+              />
+              <PrivateRoute path="/profile" >
+                <MyProfile></MyProfile>
+              </PrivateRoute>
+              <Route 
+                path="/login" 
+                component={Login}
+              />
+              <Route 
+                component={UnknownURL}
+                path="*"
+              />
+            </Switch>
+          </div>
+          
         </Router>
-        <Route path="*">
-          <h1>404 Page</h1>
-        </Route>
-      </Switch>
-
-    </Router>
+    </UserContextProvider>
+    
   );
 }
 

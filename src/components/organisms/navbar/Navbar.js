@@ -1,12 +1,24 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../../context/UserContextProvider';
+
 import logo from '../../../assets/plyos-logo.svg';
 import "./Navbar.css";
 
 export const Navbar = () => {
+    const { currentUser, getUserToken, setActiveUser } = useContext(UserContext)
 
-    let user = localStorage.getItem("user");
+    const getUser = async (token) => {
+        await setActiveUser(token);
+    }
 
+    if (!currentUser.userMail) {
+        const token = getUserToken()
+        if (token) {
+            getUser(token)
+        }
+    }
+   
     const getElements = () => {
         const icon = document.getElementById("hamburger-menu-container");
         const header = document.getElementById("nav-header");
@@ -47,7 +59,7 @@ export const Navbar = () => {
                     <li onClick={openOrCloseNav}><Link className="link" to="/mytraining">MyTraining</Link></li>
                     <li onClick={openOrCloseNav}><Link className="link" to="/blogs">Blogs</Link></li>
                     <li onClick={openOrCloseNav}><Link className="link" to="/contact">Contact</Link></li>
-                    {user 
+                    {currentUser.userMail 
                         ? <li onClick={openOrCloseNav}><Link className="link" to="/profile">Profile</Link></li>
                         : <li onClick={openOrCloseNav}><Link className="link" to="/login">Log in</Link></li>
                     }

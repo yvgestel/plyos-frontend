@@ -2,12 +2,22 @@
     font-size: 3rem;
 }
 
+.sm-title {
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 1rem;
+}
+
 .page-hdr {
     font-size: 1.5rem;
     margin: 2rem 0 1rem;
     width: 100%;
     text-align: center;
     line-height: calc(3rem*1.4);
+}
+
+.blog-hdr {
+    font-size: 1.5rem;
 }
 
 .blog-hdr {

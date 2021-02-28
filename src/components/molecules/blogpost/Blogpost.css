@@ -1,0 +1,12 @@
+.blog-post-container {
+    width: 80%;
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+.blog-post-info {
+    background-color: var(--grey);
+    border-radius: 25px;
+    margin-top: -1rem;
+    padding: 1.5rem 1rem;
+}
