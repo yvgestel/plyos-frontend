@@ -23,16 +23,16 @@ export const Exercises = () => {
             await setActiveUser(token);
         }
         async function fetchNewest() {
-            const [response, error] = await db.fetch("/exercises/latest")
+            const [response] = await db.fetch("/exercises/latest")
             return response.data
         } 
         async function fetchMostWatched() {
-            const [response, error] = await db.fetch("/exercises/most-watched")
+            const [response] = await db.fetch("/exercises/most-watched")
             return response.data
         } 
         async function fetchFavorites() {
             const token = await getUserToken()
-            const [response, error] = await db.privateFetch(`/user/${currentUser.userId}/favorites`, token)
+            const [response] = await db.privateFetch(`/user/${currentUser.userId}/favorites`, token)
             return response.data[0].favorites
         }
 

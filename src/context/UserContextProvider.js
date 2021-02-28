@@ -30,7 +30,7 @@ export const UserContextProvider = ({ children }) => {
     }
 
     async function setActiveUser (token) {
-        const [response, error] = await db.privateFetch("/user/profile", token);
+        const [response] = await db.privateFetch("/user/profile", token);
         if (response) {
             setCurrentUser({
                 ...currentUser,

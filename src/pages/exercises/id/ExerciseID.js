@@ -14,6 +14,7 @@ import { Popup } from '../../../components/atoms/popup/Popup';
 import { Button } from '../../../components/atoms/button/Button';
 import { Input } from '../../../components/atoms/input/Input';
 import { Markdownbox } from '../../../components/atoms/markdown/Markdown';
+import { Loading } from '../../../components/atoms/loading/Loading';
 
 import { UserContext } from '../../../context/UserContextProvider';
 
@@ -35,7 +36,7 @@ export const ExerciseID = () => {
 
     async function fetchTrainingData() {
         const token = getUserToken() 
-        const [response, error] = await db.privateFetch(`/training/${currentUser.userId}`, token)
+        const [response] = await db.privateFetch(`/training/${currentUser.userId}`, token)
         if (response.data) {
             setAllTrainings(response.data)
         }
@@ -43,7 +44,7 @@ export const ExerciseID = () => {
 
     const getUserFavorite = async () => {
             const token = await getUserToken()
-            const [response, error] = await db.privateFetch(`/user/${currentUser.userId}/favorites`, token)
+            const [response] = await db.privateFetch(`/user/${currentUser.userId}/favorites`, token)
             setFavorites(response.data[0].favorites)
     }
 
@@ -54,7 +55,7 @@ export const ExerciseID = () => {
         }
 
         async function fetchExercisesData() {
-            const [response, error] = await db.fetch(`/exercises/${id}`)
+            const [response] = await db.fetch(`/exercises/${id}`)
             setExercise(response.data)
             return response.data
         } 
@@ -64,7 +65,7 @@ export const ExerciseID = () => {
             const newViews = {
                 "views": newViewCount
             }
-            const [response, error] = await db.patch(`/exercises/${id}`,newViews)
+            const [response] = await db.patch(`/exercises/${id}`,newViews)
         }
 
         async function initializePage (){
@@ -90,7 +91,7 @@ export const ExerciseID = () => {
                 const newFavorites = {
                     "favorites": favorites
                 }
-                const [response, error] = await db.privatePatch(`/user/${currentUser.userId}`, token, newFavorites)
+                const [response] = await db.privatePatch(`/user/${currentUser.userId}`, token, newFavorites)
             }
             setHeartIcon(faHeartRegular)
         } else {
@@ -99,7 +100,7 @@ export const ExerciseID = () => {
             const newFavorites = {
                 "favorites": favorites
             }
-            const [response, error] = await db.privatePatch(`/user/${currentUser.userId}`, token, newFavorites)
+            const [response] = await db.privatePatch(`/user/${currentUser.userId}`, token, newFavorites)
             setHeartIcon(faHeartSolid)
         }
     }
@@ -107,7 +108,7 @@ export const ExerciseID = () => {
     const addExerciseToTraining = async (training) => {
         training.exercises.push(exercise)
         const token = getUserToken() 
-        const [response, error] = await db.privatePatch(`/training/${training._id}`, token, training)
+        const [response] = await db.privatePatch(`/training/${training._id}`, token, training)
         setHidePopup(true)
     }
 
@@ -122,7 +123,7 @@ export const ExerciseID = () => {
             user: currentUser.userId
         }
         const token = getUserToken() 
-        const [result, error] = await db.privatePost("/training", training, token)
+        const [result] = await db.privatePost("/training", training, token)
     }
 
     const openCloseTrainingPopUp = () => {
@@ -167,7 +168,7 @@ export const ExerciseID = () => {
         // {exercise.markdown || ""} IPV {exercise.markdown}
         // to prevent error .replace of undefined
         !exercise ?
-            <h1>Loading</h1>
+            <Loading />
             :
             <Fragment>
                 <Photo image={exercise.exerciseImage} className="exercises-img" alt="Exercises 1"/>

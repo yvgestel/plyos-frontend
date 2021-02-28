@@ -2,9 +2,8 @@ import React from 'react';
 import './PreviewBar.css';
 
 import { Preview } from '../preview/Preview';
-import ViewAll from '../../../assets/view-all.jpg';
 
-export const PreviewBar = ({ title, pathTo, data, viewMore}) => {
+export const PreviewBar = ({ title, pathTo, data}) => {
     return (
         <div id="preview-bar" className="preview-bar-wrapper" data-content={title}>
             <div className="preview-container">
@@ -20,8 +19,7 @@ export const PreviewBar = ({ title, pathTo, data, viewMore}) => {
                     ))
                     :
                     <div className="empty-preview">
-                        <p>Woepsie!</p>
-                        <p>No exercises found.</p>
+                        <span>No exercises found.</span>
                     </div>   
                 }
             </div>

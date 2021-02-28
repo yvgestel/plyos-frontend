@@ -13,7 +13,7 @@ export const Blogs = () => {
     const db = new DatabaseHelper()
     useEffect (() => {
         async function fetchData() {
-            const [response, error] = await db.fetch("/blog")
+            const [response] = await db.fetch("/blog")
             setBlogs(response.data)
         } 
         fetchData()
@@ -23,12 +23,20 @@ export const Blogs = () => {
             <Background className="bg-orange-100" >
                 <Title className="page-hdr">Blogs</Title>
                 <div className="blog-container">
-                    { blogs.map(blog => (
+                { blogs ?
+                    ( 
+                        blogs.map(blog => (
                         <Link key={blog._id} to={`/blogs/${blog._id}`}>  
                             <Blogpost key={blog._id} image={blog.blogImage} title={blog.title} date={blog.date} alt={blog.title} />
                         </Link>
                         ))
-                    }
+                    )
+                    :
+                    <span>
+                        An error occurred while loading the blogs, please try again later.  
+                    </span>
+                }
+                    
                 </div>
             </Background>
     )

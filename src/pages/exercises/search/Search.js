@@ -10,6 +10,7 @@ import { SearchBar } from '../../../components/molecules/searchbar/SearchBar';
 import { Title } from '../../../components/atoms/title/Title';
 import { Button } from '../../../components/atoms/button/Button';
 import { Popup } from '../../../components/atoms/popup/Popup';
+import { Loading } from '../../../components/atoms/loading/Loading';
 
 import { faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -25,7 +26,7 @@ export const SearchPage = () => {
     const db = new DatabaseHelper()
     useEffect (() => {
         async function fetchData() {
-            const [response, error] = await db.fetch("/exercises")
+            const [response] = await db.fetch("/exercises")
             setAllExercises(response.data)
         } 
 
@@ -144,7 +145,7 @@ export const SearchPage = () => {
     return (
         allExercises.length<1 
         ?
-        <h1>Loading</h1>
+        <Loading />
         :
         <Background className="bg-green-100" >
             <Title className="page-hdr">Exercises</Title>

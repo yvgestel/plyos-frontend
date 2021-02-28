@@ -29,7 +29,7 @@ export const MyTraining = (props) => {
     useEffect (() => {
         async function fetchData() {
             const token = getUserToken() 
-            const [response, error] = await db.privateFetch(`/training/${currentUser.userId}`, token)
+            const [response] = await db.privateFetch(`/training/${currentUser.userId}`, token)
             if (response.data.length>0) {
                 setAllTrainings(response.data)
             }
@@ -39,7 +39,7 @@ export const MyTraining = (props) => {
 
     const deleteTraining = async (training) => {
         const token = getUserToken();
-        const [result, error] = await db.privateDelete(`/training/${training._id}`, token);
+        const [result] = await db.privateDelete(`/training/${training._id}`, token);
         for (let i=0; i<allTrainings.length; i++){
             if (allTrainings[i]._id === training._id){
                 allTrainings.splice(i,1)
@@ -55,7 +55,7 @@ export const MyTraining = (props) => {
             user: currentUser.userId
         }
         const token = getUserToken() 
-        const [result, error] = await db.privatePost("/training", training, token)
+        const [result] = await db.privatePost("/training", training, token)
         allTrainings.push(result.data.createdTraining)
         setAllTrainings(allTrainings)
     }
