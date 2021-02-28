@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 
 import './MyProfile.css'
 
@@ -9,24 +10,57 @@ import { Input } from '../../components/atoms/input/Input';
 import { Background } from '../../components/atoms/background/Background';
 import { UserContext } from '../../context/UserContextProvider';
 
+import DatabaseHelper from '../../helpers/databaseHelper';
+
 export const MyProfile = (props) => {
+    const { currentUser, getUserToken, setActiveUser } = useContext(UserContext);
     const { register, handleSubmit, errors } = useForm();
+    const [profileError, setProfileError] = useState(null);
     const { logOutUser } = useContext(UserContext);
     const [input, setInput] = useState(false);
+
+    const history = useHistory();
+    const db = new DatabaseHelper()
+
+    useEffect(() => {
+        async function getUser() {
+            const token = await getUserToken()
+            await setActiveUser(token);
+        }
+        getUser()
+    },[])
 
     const logOut = () => {
         logOutUser();
     };
 
-    const deleteAccount = () => {
-        console.log("Deleting Account");
+    const deleteAccount = async () => {
+        const token = getUserToken()
+        const [response] = await db.privateDelete(`/user/${currentUser.userId}`, token)
+        if(response) {
+            history.push("/login")
+        } else {
+            setProfileError("Something went wrong on the server. Please try again later.")
+        }
     }
 
-    const changePassword = async () => {
-        await setInput(!input);
-        if (input) {
-            console.log("Change password")
+    const setChangePassword = () => {
+        setInput(true);
+    }
+
+    const changePassword = async ({password}) => {
+        setProfileError(null)
+        const newPassword = {
+            "password": password,
         }
+        const token = getUserToken()
+        const [response] = await db.privatePatch(`/user/password/${currentUser.userId}`, token, newPassword)
+        if (response){
+            setInput(false)
+        } else {
+            setProfileError("Something went wrong on the server. Please try again later.")
+        }
+        
     }
 
     return(
@@ -55,13 +89,14 @@ export const MyProfile = (props) => {
                         error={errors.password}   
                     />
                 }
+                {profileError && <span>{profileError}</span>}
                 <Button 
-                    onClick={handleSubmit(changePassword)}
+                    onClick={!input ? handleSubmit(setChangePassword) : handleSubmit(changePassword)}
                     type="submit"
                     className="btn-secondary"
                     color="orange"
                 >
-                Change password
+                {!input ? "Change password" : "Save password" }
                 </Button>  
                 <Button 
                     onClick={handleSubmit(deleteAccount)}

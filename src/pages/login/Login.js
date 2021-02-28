@@ -12,6 +12,7 @@ import { UserContext } from '../../context/UserContextProvider';
 
 export const Login = (props) => {
     const { register, handleSubmit, errors } = useForm();
+    const [ loginError, setLoginError] = useState(null); 
     const [signUpPage, setSignUpPage] = useState(false);
     const { logInUser, setUserToken } = useContext(UserContext);
     const history = useHistory();
@@ -23,34 +24,50 @@ export const Login = (props) => {
           email: email,
           password: password
         };
- 
         const [response, error] = await db.logIn(user);
         if (response) {
           setUserToken(response.token)
           logInUser(user.email, response.id);
           history.location.state ? history.push(history.location.state.from): history.push("/")
         } else {
-          console.log(error)
+          if(error.response.status===401) {
+            setLoginError("Unknown combination of e-mail and password")
+          } else {
+            setLoginError("There is an error on the server. Try again later.") 
+          }
         }
     };
+
+    const goToLoginPage = () => {
+      setLoginError(null)
+      setSignUpPage(!signUpPage);
+    }
 
     const setSignUp = () => {
         setSignUpPage(!signUpPage);
     };
 
-    const signUp = () => {
-        console.log("You clicked SIGN UP");
-        //extra validation ?
-        //hashing ?
-        //post request
-        //const newUser = {
-        //  email: "",
-        //  password: ""
-        //};
-    };
-
-    const forgotPassword = () => {
-        console.log("You forgot your password..")
+    const signUp = async ({email, password,password_repeat}) => {
+      setLoginError(null)
+      if (password !== password_repeat){
+        setLoginError("Passwords do not match")
+      } else {
+        const user = {
+          email: email,
+          password: password
+        };
+        const [response, error] = await db.signUp(user);
+        if (response) {
+          setSignUpPage(!signUpPage)
+        } else {
+          if (error.response.status===409) {
+            setLoginError("There's already an account for this e-mail")
+          } else {
+            setLoginError("Something went wrong on the server. Please try again later.")
+          }
+        }
+      }
+      
     };
 
     return (
@@ -84,10 +101,10 @@ export const Login = (props) => {
                         value: true,
                         message: 'Dit veld mag niet leeg zijn',
                       },
-                      // minLength: {
-                      //     value: 8,
-                      //     message: 'Een wachtwoord moet minimaal 8 tekens zijn'
-                      // }
+                      minLength: {
+                          value: 8,
+                          message: 'Een wachtwoord moet minimaal 8 tekens zijn'
+                      }
                     }
                   )}
                 error={errors.password}    
@@ -110,28 +127,36 @@ export const Login = (props) => {
                     error={errors.password_repeat}    
                 />
             }
+            {
+              loginError && <span>{loginError}</span>
+            }
             {!signUpPage ?
                 <Fragment>
-                    <Button onClick={handleSubmit(logIn)}
-                    type="submit"
-                    className="btn-primary"
+                    <Button 
+                      onClick={handleSubmit(logIn)}
+                      type="submit"
+                      className="btn-primary"
                     >Log in</Button>
-                    <Button onClick={setSignUp}
-                    type="text"
-                    className="btn-secondary"
+                    <Button 
+                      onClick={setSignUp}
+                      type="text"
+                      className="btn-secondary"
                     >Sign up</Button>
-                    <Button onClick={forgotPassword}
-                    type="text"
-                    className="btn-tertiary"
-                    >Forgot my password</Button>
                 </Fragment>
             :
-                <Button onClick={handleSubmit(signUp)}
-                type="submit"
-                className="btn-primary"
+              <Fragment>
+                <Button 
+                  onClick={handleSubmit(signUp)}
+                  type="submit"
+                  className="btn-primary"
                 >Sign up</Button>
+                <Button 
+                  onClick={handleSubmit(goToLoginPage)}
+                  type="submit"
+                  className="btn-secondary"
+                >Back</Button>
+              </Fragment>
             }
-            <span></span>
         </form>
       </Fragment>
     );

@@ -9,3 +9,10 @@ html, body {
     height: calc(100vh - 8rem);
     overflow: hidden;
 }
+
+span {
+    text-align: center;
+    color: var(--black);
+    font-weight: bold;
+    margin: 0.5rem;
+}

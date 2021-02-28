@@ -20,7 +20,7 @@ export default class DatabaseHelper {
       let data = "";
       let error = {};
         try {
-          const response = await Axios.post(`${this.baseURL}/user/login`, newUser);
+          const response = await Axios.post(`${this.baseURL}/user/signup`, newUser);
           data = response;
         } catch (err) {
           error = err;     
